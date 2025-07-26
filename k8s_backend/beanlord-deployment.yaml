@@ -13,6 +13,7 @@ spec:
       labels:
         app: beanlord
     spec:
+      serviceAccountName: beanlord-operator-sa
       initContainers:
         - name: db-init
           image: beanlord-db-init:1.1
@@ -37,3 +38,5 @@ spec:
       containers:
         - name: main
           image: beanlord-main:1.0
+        - name: beanlord-operator
+          image: beanlord-operator:1.1
