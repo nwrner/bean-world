@@ -1,0 +1,16 @@
+# ... your existing builder and base stages
+
+# Second binary for reader
+FROM golang:1.24.5 as reader-builder
+WORKDIR /app
+COPY . .
+RUN go build -o beanlord-reader reader.go
+
+# Final multi-binary image
+FROM debian:bullseye-slim
+WORKDIR /app
+
+COPY --from=builder /app/beanlord-init .
+COPY --from=reader-builder /app/beanlord-reader .
+
+CMD ["./beanlord-init"]  # will override per-container in k8s

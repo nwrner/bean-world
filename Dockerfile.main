@@ -1,0 +1,4 @@
+# Dockerfile.main
+FROM debian:bookworm-slim
+
+CMD ["sleep", "infinity"]
